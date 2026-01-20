@@ -12,8 +12,15 @@ body {
     padding: 40px 20px;
     position: relative;
     overflow-x: hidden;
+    background: transparent;
+}
 
-    /* Base dark green with large bright light patches */
+/* Fixed background layer - stays in place while content scrolls */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background:
         /* Large bright area top-right */
         radial-gradient(ellipse 90% 70% at 75% 15%, rgba(190, 210, 150, 0.45) 0%, rgba(170, 195, 130, 0.2) 30%, transparent 55%),
