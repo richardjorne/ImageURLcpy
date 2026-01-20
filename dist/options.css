@@ -1,0 +1,306 @@
+/* Options Page Styles - Atmospheric Green with Bright Light Areas */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+
+    /* Base dark green with large bright light patches */
+    background:
+        /* Large bright area top-right */
+        radial-gradient(ellipse 90% 70% at 75% 15%, rgba(190, 210, 150, 0.45) 0%, rgba(170, 195, 130, 0.2) 30%, transparent 55%),
+        /* Bright area bottom-left */
+        radial-gradient(ellipse 80% 60% at 20% 85%, rgba(175, 200, 140, 0.35) 0%, rgba(160, 185, 125, 0.15) 35%, transparent 50%),
+        /* Medium bright center */
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(165, 190, 135, 0.2) 0%, transparent 45%),
+        /* Smaller accent light */
+        radial-gradient(ellipse 40% 35% at 90% 70%, rgba(200, 215, 165, 0.25) 0%, transparent 40%),
+        /* Base gradient */
+        linear-gradient(160deg, #2d4229 0%, #243822 25%, #1e3020 50%, #182818 75%, #121e12 100%);
+}
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: linear-gradient(165deg,
+            rgba(55, 80, 50, 0.65) 0%,
+            rgba(42, 62, 40, 0.7) 35%,
+            rgba(32, 48, 30, 0.78) 70%,
+            rgba(26, 40, 25, 0.85) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(220, 235, 200, 0.06);
+    border: 1px solid rgba(180, 200, 150, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Inner ambient light */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -30%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(200, 220, 160, 0.08) 0%, transparent 55%);
+    pointer-events: none;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 60%;
+    height: 70%;
+    background: radial-gradient(ellipse, rgba(180, 210, 140, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #f2f7ee;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #aabbaa;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e5efe2;
+    margin-bottom: 6px;
+}
+
+h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a8d898;
+    margin-bottom: 10px;
+}
+
+.settings-section {
+    background: rgba(30, 48, 28, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(160, 180, 140, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.description {
+    font-size: 13px;
+    color: #a0b09c;
+    margin-bottom: 16px;
+}
+
+.input-group {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.input-row {
+    flex: 1;
+}
+
+.input-row label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #b8c8b4;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.input-row input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(160, 180, 140, 0.15);
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    transition: all 0.2s ease;
+    background: rgba(20, 32, 18, 0.7);
+    color: #e0f0dc;
+}
+
+.input-row input:focus {
+    outline: none;
+    border-color: rgba(160, 200, 140, 0.4);
+    box-shadow: 0 0 0 3px rgba(140, 180, 120, 0.15);
+    background: rgba(25, 40, 22, 0.8);
+}
+
+.input-row input::placeholder {
+    color: #6a7a66;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.multi-group {
+    background: rgba(25, 40, 24, 0.5);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(160, 180, 140, 0.08);
+}
+
+.multi-group .input-group {
+    margin-bottom: 0;
+}
+
+.preview {
+    background: rgba(12, 20, 10, 0.8);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 14px;
+    border: 1px solid rgba(100, 130, 90, 0.1);
+}
+
+.preview-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #7a9a70;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.preview code,
+.preview pre {
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    font-size: 12px;
+    color: #a8e898;
+    background: none;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: rgba(245, 250, 240, 0.95);
+    color: #2a3d28;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: rgba(70, 95, 65, 0.5);
+    color: #c8d8c4;
+    border: 1px solid rgba(160, 180, 140, 0.15);
+}
+
+.btn-secondary:hover {
+    background: rgba(80, 110, 75, 0.6);
+    border-color: rgba(180, 200, 160, 0.25);
+}
+
+.status {
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.status.success {
+    background: rgba(100, 160, 90, 0.2);
+    color: #b8f0a8;
+    border: 1px solid rgba(140, 200, 120, 0.25);
+}
+
+.status.error {
+    background: rgba(180, 90, 80, 0.2);
+    color: #f0b8b0;
+    border: 1px solid rgba(200, 130, 120, 0.25);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 540px) {
+    .input-group {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 24px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

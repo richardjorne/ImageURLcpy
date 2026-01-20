@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageURLcpy 设置</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>ImageURLcpy 设置</h1>
+            <p class="subtitle">配置复制URL时的前缀和后缀</p>
+        </header>
+
+        <section class="settings-section">
+            <h2>单个URL格式</h2>
+            <p class="description">当只捕获一个图片时使用此格式</p>
+            <div class="input-group">
+                <div class="input-row">
+                    <label for="singlePrefix">前缀</label>
+                    <input type="text" id="singlePrefix" placeholder="例如: <img src=&quot;">
+                </div>
+                <div class="input-row">
+                    <label for="singleSuffix">后缀</label>
+                    <input type="text" id="singleSuffix" placeholder="例如: &quot;>">
+                </div>
+            </div>
+            <div class="preview">
+                <span class="preview-label">预览</span>
+                <code id="singlePreview">[前缀]URL[后缀]</code>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>多个URL格式</h2>
+            <p class="description">当捕获多个图片时，分别设置首个、中间、最后一个URL的格式</p>
+
+            <div class="multi-group">
+                <h3>首个URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="firstPrefix">前缀</label>
+                        <input type="text" id="firstPrefix" placeholder="首个URL前缀">
+                    </div>
+                    <div class="input-row">
+                        <label for="firstSuffix">后缀</label>
+                        <input type="text" id="firstSuffix" placeholder="首个URL后缀">
+                    </div>
+                </div>
+            </div>
+
+            <div class="multi-group">
+                <h3>中间URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="middlePrefix">前缀</label>
+                        <input type="text" id="middlePrefix" placeholder="中间URL前缀">
+                    </div>
+                    <div class="input-row">
+                        <label for="middleSuffix">后缀</label>
+                        <input type="text" id="middleSuffix" placeholder="中间URL后缀">
+                    </div>
+                </div>
+            </div>
+
+            <div class="multi-group">
+                <h3>最后一个URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="lastPrefix">前缀</label>
+                        <input type="text" id="lastPrefix" placeholder="最后一个URL前缀">
+                    </div>
+                    <div class="input-row">
+                        <label for="lastSuffix">后缀</label>
+                        <input type="text" id="lastSuffix" placeholder="最后一个URL后缀">
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview">
+                <span class="preview-label">预览（3个URL示例）</span>
+                <pre id="multiPreview">[首前缀]URL1[首后缀]
+[中前缀]URL2[中后缀]
+[尾前缀]URL3[尾后缀]</pre>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button id="saveBtn" class="btn btn-primary">保存设置</button>
+            <button id="resetBtn" class="btn btn-secondary">重置为默认</button>
+        </div>
+
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

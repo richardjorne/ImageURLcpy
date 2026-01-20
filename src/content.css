@@ -1,0 +1,11 @@
+/* Content Script Styles for ImageURLcpy Extension */
+
+/* Ensure images have pointer cursor during capture mode */
+.imageurlcpy-capturing img {
+  cursor: pointer !important;
+}
+
+/* Overlay already styled inline, but keeping this for reference */
+#imageurlcpy-overlay {
+  pointer-events: none;
+}

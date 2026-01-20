@@ -1,0 +1,41 @@
+{
+    "manifest_version": 3,
+    "name": "ImageURLcpy",
+    "version": "1.1.0",
+    "description": "快速捕获并复制网页中的图片URL",
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "clipboardWrite",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "ImageURLcpy"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    }
+}
