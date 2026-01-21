@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageURLcpy - Batch Copy Image URLs with One Click</title>
+    <meta name="description"
+        content="ImageURLcpy is an elegant Chrome extension that lets you easily batch capture image URLs from any webpage, with custom formatting and instant clipboard copy.">
+    <meta name="keywords" content="Chrome Extension, Image URL, Batch Copy, ImageURLcpy, URL Copy Tool">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts: Playfair Display for English serif, Inter for sans, Noto Sans for CJK -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Language Switcher -->
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                <path d="M3 15L8 10L13 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M13 13L16 10L21 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span>ImageURLcpy</span>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="zh">中</button>
+            <button class="lang-btn" data-lang="ja">日</button>
+        </div>
+    </nav>
+
+    <!-- Floating Decorative Elements -->
+    <div class="floating-elements">
+        <!-- Top area -->
+        <div class="float-icon float-1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                <path d="M21 15l-5-5L5 21" />
+            </svg>
+        </div>
+        <div class="float-icon float-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+            </svg>
+        </div>
+        <div class="float-icon float-3">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" />
+            </svg>
+        </div>
+        <!-- More floating elements -->
+        <div class="float-icon float-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+            </svg>
+        </div>
+        <div class="float-icon float-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+            </svg>
+        </div>
+        <div class="float-icon float-6">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+        </div>
+        <div class="float-icon float-7">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+            </svg>
+        </div>
+        <div class="float-icon float-8">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+            </svg>
+        </div>
+        <!-- Glowing orbs -->
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="glow-orb orb-4"></div>
+    </div>
+
+    <!-- Hero Section - Full Width, No Card Constraint -->
+    <section class="hero">
+        <div class="hero-badge">Chrome Extension</div>
+        <h1 class="hero-title" data-lang="en">
+            <span class="text-light">Capture</span> image URLs
+            <br>
+            <span class="text-accent">effortlessly</span> <span class="text-light">&</span>
+            <em class="text-italic">beautifully</em>
+        </h1>
+        <p class="hero-subtitle">
+            A refined Chrome extension for batch capturing image URLs.
+            <br>
+            Hover to highlight, click to copy, format as you wish.
+        </p>
+        <div class="hero-cta">
+            <a href="#" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <span class="btn-text">Add to Chrome — It's Free</span>
+            </a>
+            <a href="https://github.com" class="btn btn-ghost">
+                <span class="btn-text">View on GitHub</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-value">★ 4.9</span>
+                <span class="stat-label">Rating</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-value">10K+</span>
+                <span class="stat-label">Users</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <span class="section-label">Features</span>
+            <h2><span class="text-light">6 tools</span> — <em class="text-italic">one extension</em></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                </div>
+                <h3>Batch Capture</h3>
+                <p>One-click to start, continuously capture multiple image URLs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                        <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                </div>
+                <h3>Smart Highlight</h3>
+                <p>Hover over images to see a translucent green overlay</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                    </svg>
+                </div>
+                <h3>Instant Copy</h3>
+                <p>Click to copy URL instantly, toast notification confirms</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                </div>
+                <h3>Custom Format</h3>
+                <p>Set prefix & suffix for single or multiple URLs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </div>
+                <h3>Live Preview</h3>
+                <p>See exactly how your formatted URLs will look</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <h3>Elegant Design</h3>
+                <p>Morandi green palette, glassmorphism, smooth animations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="section-header">
+            <span class="section-label">How it works</span>
+            <h2><em class="text-italic">Three</em> <span class="text-light">simple steps</span></h2>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Start Capture</h3>
+                <p>Click the extension icon and hit "Start Capturing"</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Select Images</h3>
+                <p>Hover to highlight, click to copy each URL</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Done</h3>
+                <p>Stop capture — all URLs are in your clipboard</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ImageURLcpy. Built for productivity.</p>
+    </footer>
+
+    <script>
+        // Language Switcher with proper CJK handling
+        const translations = {
+            en: {
+                badge: 'Chrome Extension',
+                // For English: use italic serif for emphasis
+                title: '<span class="text-light">Capture</span> image URLs<br><span class="text-accent">effortlessly</span> <span class="text-light">&</span> <em class="text-italic">beautifully</em>',
+                subtitle: 'A refined Chrome extension for batch capturing image URLs.<br>Hover to highlight, click to copy, format as you wish.',
+                cta: 'Add to Chrome — It\'s Free',
+                github: 'View on GitHub',
+                rating: 'Rating',
+                users: 'Users',
+                featuresLabel: 'Features',
+                featuresTitle: '<span class="text-light">6 tools</span> — <em class="text-italic">one extension</em>',
+                f1: 'Batch Capture', f1d: 'One-click to start, continuously capture multiple image URLs',
+                f2: 'Smart Highlight', f2d: 'Hover over images to see a translucent green overlay',
+                f3: 'Instant Copy', f3d: 'Click to copy URL instantly, toast notification confirms',
+                f4: 'Custom Format', f4d: 'Set prefix & suffix for single or multiple URLs',
+                f5: 'Live Preview', f5d: 'See exactly how your formatted URLs will look',
+                f6: 'Elegant Design', f6d: 'Morandi green palette, glassmorphism, smooth animations',
+                howLabel: 'How it works',
+                howTitle: '<em class="text-italic">Three</em> <span class="text-light">simple steps</span>',
+                s1: 'Start Capture', s1d: 'Click the extension icon and hit "Start Capturing"',
+                s2: 'Select Images', s2d: 'Hover to highlight, click to copy each URL',
+                s3: 'Done', s3d: 'Stop capture — all URLs are in your clipboard',
+                footer: '© 2026 ImageURLcpy. Built for productivity.'
+            },
+            zh: {
+                badge: 'Chrome 扩展程序',
+                // For Chinese: use weight for emphasis instead of italic
+                title: '<span class="text-accent cjk-bold">一键批量</span>复制<br>网页图片<span class="text-accent cjk-bold">链接</span>',
+                subtitle: '优雅的 Chrome 扩展，轻松捕获网页中的图片 URL。<br>悬停高亮，点击复制，自定义格式。',
+                cta: '添加到 Chrome — 免费',
+                github: '在 GitHub 查看',
+                rating: '评分',
+                users: '用户',
+                featuresLabel: '功能特点',
+                featuresTitle: '<span class="text-accent cjk-bold">6 大功能</span> — 一个扩展',
+                f1: '批量捕获', f1d: '一键开启，连续捕获多张图片 URL',
+                f2: '智能高亮', f2d: '悬停图片自动显示绿色半透明覆盖层',
+                f3: '即时复制', f3d: '点击即复制，Toast 通知即时反馈',
+                f4: '自定义格式', f4d: '为单个或多个 URL 设置前缀后缀',
+                f5: '实时预览', f5d: '设置页面即时预览复制效果',
+                f6: '优雅设计', f6d: '深绿莫兰迪配色，毛玻璃效果，流畅动画',
+                howLabel: '使用流程',
+                howTitle: '<span class="text-accent cjk-bold">简单三步</span> 轻松搞定',
+                s1: '开始捕获', s1d: '点击扩展图标，然后点击"开始捕获"',
+                s2: '选择图片', s2d: '悬停高亮显示，点击复制 URL',
+                s3: '完成', s3d: '停止捕获 — 所有 URL 已在剪贴板',
+                footer: '© 2026 ImageURLcpy. 为高效工作而生。'
+            },
+            ja: {
+                badge: 'Chrome 拡張機能',
+                // For Japanese: use weight for emphasis instead of italic
+                title: '<span class="text-accent cjk-bold">画像URL</span>を<br><span class="text-accent cjk-bold">簡単に</span>キャプチャ',
+                subtitle: '画像URLを一括キャプチャするための洗練されたChrome拡張機能。<br>ホバーでハイライト、クリックでコピー、好みのフォーマットで。',
+                cta: 'Chromeに追加 — 無料',
+                github: 'GitHubで見る',
+                rating: '評価',
+                users: 'ユーザー',
+                featuresLabel: '機能',
+                featuresTitle: '<span class="text-accent cjk-bold">6つのツール</span> — 1つの拡張機能',
+                f1: '一括キャプチャ', f1d: 'ワンクリックで開始、複数の画像URLを連続キャプチャ',
+                f2: 'スマートハイライト', f2d: '画像にホバーすると半透明の緑オーバーレイが表示',
+                f3: '即時コピー', f3d: 'クリックでURLを即座にコピー、トースト通知で確認',
+                f4: 'カスタムフォーマット', f4d: '単一または複数のURLにプレフィックス・サフィックスを設定',
+                f5: 'ライブプレビュー', f5d: 'フォーマットされたURLの見た目を確認',
+                f6: 'エレガントなデザイン', f6d: 'モランディグリーン、グラスモーフィズム、スムーズなアニメーション',
+                howLabel: '使い方',
+                howTitle: '<span class="text-accent cjk-bold">簡単3ステップ</span>',
+                s1: 'キャプチャ開始', s1d: '拡張機能アイコンをクリックし「キャプチャ開始」を押す',
+                s2: '画像を選択', s2d: 'ホバーでハイライト、クリックで各URLをコピー',
+                s3: '完了', s3d: 'キャプチャ停止 — すべてのURLがクリップボードに',
+                footer: '© 2026 ImageURLcpy. 生産性のために作られました。'
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Set document language and font class
+                document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en';
+                document.body.classList.remove('lang-en', 'lang-zh', 'lang-ja');
+                document.body.classList.add('lang-' + lang);
+
+                const t = translations[lang];
+                document.querySelector('.hero-badge').textContent = t.badge;
+                document.querySelector('.hero-title').innerHTML = t.title;
+                document.querySelector('.hero-subtitle').innerHTML = t.subtitle;
+                document.querySelector('.btn-primary .btn-text').textContent = t.cta;
+                document.querySelector('.btn-ghost .btn-text').textContent = t.github;
+                document.querySelector('.stat:first-child .stat-label').textContent = t.rating;
+                document.querySelector('.stat:last-child .stat-label').textContent = t.users;
+
+                const sectionLabels = document.querySelectorAll('.section-label');
+                sectionLabels[0].textContent = t.featuresLabel;
+                sectionLabels[1].textContent = t.howLabel;
+
+                const sectionTitles = document.querySelectorAll('.section-header h2');
+                sectionTitles[0].innerHTML = t.featuresTitle;
+                sectionTitles[1].innerHTML = t.howTitle;
+
+                const featureCards = document.querySelectorAll('.feature-card');
+                featureCards[0].querySelector('h3').textContent = t.f1;
+                featureCards[0].querySelector('p').textContent = t.f1d;
+                featureCards[1].querySelector('h3').textContent = t.f2;
+                featureCards[1].querySelector('p').textContent = t.f2d;
+                featureCards[2].querySelector('h3').textContent = t.f3;
+                featureCards[2].querySelector('p').textContent = t.f3d;
+                featureCards[3].querySelector('h3').textContent = t.f4;
+                featureCards[3].querySelector('p').textContent = t.f4d;
+                featureCards[4].querySelector('h3').textContent = t.f5;
+                featureCards[4].querySelector('p').textContent = t.f5d;
+                featureCards[5].querySelector('h3').textContent = t.f6;
+                featureCards[5].querySelector('p').textContent = t.f6d;
+
+                const steps = document.querySelectorAll('.step');
+                steps[0].querySelector('h3').textContent = t.s1;
+                steps[0].querySelector('p').textContent = t.s1d;
+                steps[1].querySelector('h3').textContent = t.s2;
+                steps[1].querySelector('p').textContent = t.s2d;
+                steps[2].querySelector('h3').textContent = t.s3;
+                steps[2].querySelector('p').textContent = t.s3d;
+
+                document.querySelector('footer p').textContent = t.footer;
+            });
+        });
+
+        // Initialize with English class
+        document.body.classList.add('lang-en');
+    </script>
+</body>
+
+</html>
