@@ -19,6 +19,7 @@ interface CaptureState {
     overlay: HTMLDivElement | null;
     stopButton: HTMLButtonElement | null;
     currentHoveredImg: HTMLImageElement | null;
+    cachedSettings: FormatSettings;
 }
 
 const CONTENT_DEFAULT_SETTINGS: FormatSettings = {
@@ -37,22 +38,39 @@ const state: CaptureState = {
     capturedUrls: [],
     overlay: null,
     stopButton: null,
-    currentHoveredImg: null
+    currentHoveredImg: null,
+    cachedSettings: CONTENT_DEFAULT_SETTINGS
 };
 
 // Initialize i18n
 const i18n = I18n.getInstance();
 i18n.init().catch(console.error);
 
+// Initialize settings
+getFormatSettings().then(settings => {
+    state.cachedSettings = settings;
+});
+
 // Listen for language changes and update config
 chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'sync' && changes.language) {
-        i18n.init().then(() => {
-            // If capturing, update UI immediately
-            if (state.isCapturing && state.stopButton) {
-                state.stopButton.textContent = i18n.getMessage('content.button.stop');
-            }
-        }).catch(console.error);
+    if (area === 'sync') {
+        if (changes.language) {
+            i18n.init().then(() => {
+                // If capturing, update UI immediately
+                if (state.isCapturing && state.stopButton) {
+                    state.stopButton.textContent = i18n.getMessage('content.button.stop');
+                }
+            }).catch(console.error);
+        }
+
+        // Update cached settings if any format settings changed
+        const settingKeys = Object.keys(CONTENT_DEFAULT_SETTINGS);
+        const hasSettingChange = settingKeys.some(key => key in changes);
+        if (hasSettingChange) {
+            getFormatSettings().then(settings => {
+                state.cachedSettings = settings;
+            });
+        }
     }
 });
 
@@ -286,9 +304,8 @@ async function handleClick(e: MouseEvent): Promise<void> {
         if (url && !state.capturedUrls.includes(url)) {
             state.capturedUrls.push(url);
 
-            // Get format settings and apply them
-            const settings = await getFormatSettings();
-            const formattedUrls = formatUrls(state.capturedUrls, settings);
+            // Use cached settings to avoid async await which breaks Safari clipboard
+            const formattedUrls = formatUrls(state.capturedUrls, state.cachedSettings);
 
             // Copy formatted URLs to clipboard
             navigator.clipboard.writeText(formattedUrls).then(() => {
@@ -313,6 +330,11 @@ function startCapture(): void {
     console.log('[ImageURLcpy] Starting capture mode');
     state.isCapturing = true;
     state.capturedUrls = [];
+
+    // Refresh settings
+    getFormatSettings().then(settings => {
+        state.cachedSettings = settings;
+    });
 
     addAnimationStyles();
 
@@ -340,8 +362,8 @@ function startCapture(): void {
 }
 
 // Stop capture mode
-async function stopCapture(): Promise<void> {
-    if (!state.isCapturing) return;
+async function stopCapture(returnUrlsOnly: boolean = false): Promise<string | null> {
+    if (!state.isCapturing) return null;
 
     state.isCapturing = false;
 
@@ -371,24 +393,36 @@ async function stopCapture(): Promise<void> {
 
     console.log('[ImageURLcpy] Stopping capture. URLs captured:', urlCount, capturedUrlsCopy);
 
-    // Copy all URLs to clipboard with format settings
+    // Prepare content
+    let formattedUrls = '';
     if (urlCount > 0) {
-        const settings = await getFormatSettings();
-        const formattedUrls = formatUrls(capturedUrlsCopy, settings);
-
-        navigator.clipboard.writeText(formattedUrls).then(() => {
-            showToast(i18n.getMessage('content.toast.stopStats', { count: urlCount }));
-        }).catch(err => {
-            console.error('[ImageURLcpy] Failed to copy:', err);
-            showToast(i18n.getMessage('content.toast.copyFailed'));
-        });
-    } else {
-        showToast(i18n.getMessage('content.toast.noImageCaptured'));
+        // Use cached settings
+        formattedUrls = formatUrls(capturedUrlsCopy, state.cachedSettings);
     }
 
-    // Clear state after copying
+    // Clear state
     state.capturedUrls = [];
     state.currentHoveredImg = null;
+
+    if (urlCount > 0) {
+        if (returnUrlsOnly) {
+            // Return content for popup to copy
+            showToast(i18n.getMessage('content.toast.stopStats', { count: urlCount }));
+            return formattedUrls;
+        } else {
+            // Copy directly (triggered by on-page button)
+            navigator.clipboard.writeText(formattedUrls).then(() => {
+                showToast(i18n.getMessage('content.toast.stopStats', { count: urlCount }));
+            }).catch(err => {
+                console.error('[ImageURLcpy] Failed to copy:', err);
+                showToast(i18n.getMessage('content.toast.copyFailed'));
+            });
+            return null;
+        }
+    } else {
+        showToast(i18n.getMessage('content.toast.noImageCaptured'));
+        return '';
+    }
 }
 
 // Listen for messages from background script or popup
@@ -397,8 +431,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         startCapture();
         sendResponse({ success: true });
     } else if (message.action === 'stopCapture') {
-        stopCapture();
-        sendResponse({ success: true });
+        // If called from popup, we want to return the URLs, NOT copy them here
+        stopCapture(true).then((formattedUrls) => {
+            sendResponse({ success: true, formattedUrls: formattedUrls });
+        });
+        return true; // Keep channel open
     } else if (message.action === 'getStatus') {
         sendResponse({
             isCapturing: state.isCapturing,

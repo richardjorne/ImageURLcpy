@@ -78,6 +78,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response?.success) {
                 updateUI(false);
+
+                // If we got formatted URLs back (from Safari compatibility mode), copy them here
+                if (response.formattedUrls) {
+                    navigator.clipboard.writeText(response.formattedUrls).catch(err => {
+                        console.error('Failed to copy in popup:', err);
+                    });
+                }
+
                 // Close popup after stopping
                 window.close();
             }

@@ -72,7 +72,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                         sendResponse({ success: false });
                         return;
                     }
-                    sendResponse({ success: true });
+                    sendResponse({
+                        success: true,
+                        formattedUrls: response?.formattedUrls
+                    });
                 });
             } else {
                 sendResponse({ success: false });

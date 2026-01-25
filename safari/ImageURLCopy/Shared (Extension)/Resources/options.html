@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageURLcpy</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 data-i18n="options.title">ImageURLcpy 设置</h1>
+            <p class="subtitle" data-i18n="options.subtitle">配置复制URL时的前缀和后缀</p>
+        </header>
+
+        <section class="settings-section">
+            <h2 data-i18n="options.language.label">语言 / Language</h2>
+            <div class="input-group">
+                <div class="input-row">
+                    <div class="select-wrapper">
+                        <svg class="select-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                        <select id="languageSelect" class="form-select">
+                            <option value="zh_CN">简体中文</option>
+                            <option value="en">English</option>
+                            <option value="ja">日本語</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                        </select>
+                        <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2 data-i18n="options.singleUrl.title">单个URL格式</h2>
+            <p class="description" data-i18n="options.singleUrl.desc">当只捕获一个图片时使用此格式</p>
+            <div class="input-group">
+                <div class="input-row">
+                    <label for="singlePrefix" data-i18n="options.singleUrl.prefixObj">前缀</label>
+                    <input type="text" id="singlePrefix" placeholder="例如: <img src=&quot;"
+                        data-i18n-placeholder="options.singleUrl.prefixPlaceholder">
+                </div>
+                <div class="input-row">
+                    <label for="singleSuffix" data-i18n="options.singleUrl.suffixObj">后缀</label>
+                    <input type="text" id="singleSuffix" placeholder="例如: &quot;>"
+                        data-i18n-placeholder="options.singleUrl.suffixPlaceholder">
+                </div>
+            </div>
+            <div class="preview">
+                <span class="preview-label" data-i18n="options.singleUrl.preview">预览</span>
+                <code id="singlePreview">[前缀]URL[后缀]</code>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2 data-i18n="options.multiUrl.title">多个URL格式</h2>
+            <p class="description" data-i18n="options.multiUrl.desc">当捕获多个图片时，分别设置首个、中间、最后一个URL的格式</p>
+
+            <div class="multi-group">
+                <h3 data-i18n="options.multiUrl.first.title">首个URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="firstPrefix" data-i18n="options.multiUrl.first.prefix">前缀</label>
+                        <input type="text" id="firstPrefix" placeholder="首个URL前缀"
+                            data-i18n-placeholder="options.multiUrl.first.prefix">
+                    </div>
+                    <div class="input-row">
+                        <label for="firstSuffix" data-i18n="options.multiUrl.first.suffix">后缀</label>
+                        <input type="text" id="firstSuffix" placeholder="首个URL后缀"
+                            data-i18n-placeholder="options.multiUrl.first.suffix">
+                    </div>
+                </div>
+            </div>
+
+            <div class="multi-group">
+                <h3 data-i18n="options.multiUrl.middle.title">中间URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="middlePrefix" data-i18n="options.multiUrl.middle.prefix">前缀</label>
+                        <input type="text" id="middlePrefix" placeholder="中间URL前缀"
+                            data-i18n-placeholder="options.multiUrl.middle.prefix">
+                    </div>
+                    <div class="input-row">
+                        <label for="middleSuffix" data-i18n="options.multiUrl.middle.suffix">后缀</label>
+                        <input type="text" id="middleSuffix" placeholder="中间URL后缀"
+                            data-i18n-placeholder="options.multiUrl.middle.suffix">
+                    </div>
+                </div>
+            </div>
+
+            <div class="multi-group">
+                <h3 data-i18n="options.multiUrl.last.title">最后一个URL</h3>
+                <div class="input-group">
+                    <div class="input-row">
+                        <label for="lastPrefix" data-i18n="options.multiUrl.last.prefix">前缀</label>
+                        <input type="text" id="lastPrefix" placeholder="最后一个URL前缀"
+                            data-i18n-placeholder="options.multiUrl.last.prefix">
+                    </div>
+                    <div class="input-row">
+                        <label for="lastSuffix" data-i18n="options.multiUrl.last.suffix">后缀</label>
+                        <input type="text" id="lastSuffix" placeholder="最后一个URL后缀"
+                            data-i18n-placeholder="options.multiUrl.last.suffix">
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview">
+                <span class="preview-label" data-i18n="options.multiUrl.preview">预览（3个URL示例）</span>
+                <pre id="multiPreview">[首前缀]URL1[首后缀]
+[中前缀]URL2[中后缀]
+[尾前缀]URL3[尾后缀]</pre>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button id="saveBtn" class="btn btn-primary" data-i18n="options.actions.save">保存设置</button>
+            <button id="resetBtn" class="btn btn-secondary" data-i18n="options.actions.reset">重置为默认</button>
+        </div>
+
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
