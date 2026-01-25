@@ -109,7 +109,7 @@ export class I18n {
      * Renders all elements with data-i18n attribute in the given root element (or document body)
      */
     public render(root: HTMLElement | Document = document) {
-        const elements = root.querySelectorAll('[data-i18n]');
+        const elements = root.querySelectorAll('[data-i18n], [data-i18n-placeholder], [data-i18n-title]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key) {

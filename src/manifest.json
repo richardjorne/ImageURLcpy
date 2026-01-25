@@ -2,6 +2,9 @@
     "manifest_version": 3,
     "name": "__MSG_appName__",
     "version": "1.1.0",
+    "icons": {
+        "128": "assets/icons/icon.png"
+    },
     "default_locale": "zh_CN",
     "description": "__MSG_appDesc__",
     "permissions": [
@@ -33,7 +36,8 @@
     ],
     "action": {
         "default_popup": "popup.html",
-        "default_title": "ImageURLcpy"
+        "default_title": "ImageURLcpy",
+        "default_icon": "assets/icons/icon.png"
     },
     "options_ui": {
         "page": "options.html",

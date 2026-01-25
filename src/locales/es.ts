@@ -23,6 +23,8 @@ export const es: LocaleType = {
             desc: "Formato utilizado al capturar una sola imagen",
             prefixObj: "Prefijo",
             suffixObj: "Sufijo",
+            prefixPlaceholder: 'ej: <img src="',
+            suffixPlaceholder: 'ej: ">"',
             preview: "Vista previa"
         },
         multiUrl: {

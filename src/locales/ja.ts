@@ -23,6 +23,8 @@ export const ja: LocaleType = {
             desc: "画像を1つだけキャプチャする場合に使用されます",
             prefixObj: "接頭辞 (Prefix)",
             suffixObj: "接尾辞 (Suffix)",
+            prefixPlaceholder: '例: <img src="',
+            suffixPlaceholder: '例: ">"',
             preview: "プレビュー"
         },
         multiUrl: {

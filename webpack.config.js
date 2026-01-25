@@ -35,6 +35,7 @@ module.exports = {
                 { from: 'src/options.html', to: 'options.html' },
                 { from: 'src/options.css', to: 'options.css' },
                 { from: 'src/_locales', to: '_locales' },
+                { from: 'src/assets', to: 'assets', noErrorOnMissing: true },
             ],
         }),
     ],

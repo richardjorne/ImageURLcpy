@@ -210,6 +210,41 @@
         </div>
     </section>
 
+    <!-- Showcase Section -->
+    <section class="demo">
+        <div class="section-header">
+            <span class="section-label">Showcase</span>
+            <h2 id="demo-title"><span class="text-light">Experience</span> the <em class="text-italic">magic</em></h2>
+        </div>
+
+        <div class="demo-grid">
+            <!-- First Demo: General Usage -->
+            <div class="demo-item">
+                <div class="demo-info">
+                    <h3 id="demo-1-title">Effortless Capture</h3>
+                    <p id="demo-1-desc">Simply start capturing and click on any image you want. It's that intuitive.</p>
+                </div>
+                <div class="browser-mockup">
+
+                    <img src="imgurlcpy1.gif" alt="General Usage Demo" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Second Demo: Custom Format -->
+            <div class="demo-item reverse">
+                <div class="demo-info">
+                    <h3 id="demo-2-title">Your Format, Your Choice</h3>
+                    <p id="demo-2-desc">Need Markdown? HTML? Or a custom template? Configure it once and enjoy perfect
+                        copies every time.</p>
+                </div>
+                <div class="browser-mockup">
+
+                    <img src="imgurlcpy2.gif" alt="Custom Format Demo" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- How It Works Section -->
     <section class="how-it-works">
         <div class="section-header">
@@ -265,6 +300,10 @@
                 s1: 'Start Capture', s1d: 'Click the extension icon and hit "Start Capturing"',
                 s2: 'Select Images', s2d: 'Hover to highlight, click to copy each URL',
                 s3: 'Done', s3d: 'Stop capture — all URLs are in your clipboard',
+                demoLabel: 'Showcase',
+                demoTitle: '<span class="text-light">Experience</span> the <em class="text-italic">magic</em>',
+                d1t: 'Effortless Capture', d1d: 'Simply start capturing and click on any image you want. It\'s that intuitive.',
+                d2t: 'Your Format, Your Choice', d2d: 'Need Markdown? HTML? Or a custom template? Configure it once and enjoy perfect copies every time.',
                 footer: '© 2026 ImageURLcpy. Built for productivity.'
             },
             zh: {
@@ -289,6 +328,10 @@
                 s1: '开始捕获', s1d: '点击扩展图标，然后点击"开始捕获"',
                 s2: '选择图片', s2d: '悬停高亮显示，点击复制 URL',
                 s3: '完成', s3d: '停止捕获 — 所有 URL 已在剪贴板',
+                demoLabel: '功能演示',
+                demoTitle: '<span class="text-accent cjk-bold">直观体验</span> 每一个细节',
+                d1t: '极致便捷的捕获', d1d: '开启捕获后，只需点击任意图片。操作就是这么自然。',
+                d2t: '你的格式，随心定义', d2d: '需要 Markdown、HTML 还是自定义模板？一次配置，处处效率。',
                 footer: '© 2026 ImageURLcpy. 为高效工作而生。'
             },
             ja: {
@@ -313,6 +356,10 @@
                 s1: 'キャプチャ開始', s1d: '拡張機能アイコンをクリックし「キャプチャ開始」を押す',
                 s2: '画像を選択', s2d: 'ホバーでハイライト、クリックで各URLをコピー',
                 s3: '完了', s3d: 'キャプチャ停止 — すべてのURLがクリップボードに',
+                demoLabel: 'ショーケース',
+                demoTitle: '<span class="text-accent cjk-bold">マジック</span>を体験する',
+                d1t: '手軽なキャプチャ', d1d: 'キャプチャを開始して、好きな画像をクリックするだけ。とても直感的です。',
+                d2t: 'お好みのフォーマット', d2d: 'Markdown、HTML、またはカスタムテンプレートが必要ですか？一度設定すれば、いつでも完璧なコピーが可能です。',
                 footer: '© 2026 ImageURLcpy. 生産性のために作られました。'
             }
         };
@@ -339,11 +386,18 @@
 
                 const sectionLabels = document.querySelectorAll('.section-label');
                 sectionLabels[0].textContent = t.featuresLabel;
-                sectionLabels[1].textContent = t.howLabel;
+                sectionLabels[1].textContent = t.demoLabel;
+                sectionLabels[2].textContent = t.howLabel;
 
                 const sectionTitles = document.querySelectorAll('.section-header h2');
                 sectionTitles[0].innerHTML = t.featuresTitle;
-                sectionTitles[1].innerHTML = t.howTitle;
+                sectionTitles[1].innerHTML = t.demoTitle;
+                sectionTitles[2].innerHTML = t.howTitle;
+
+                document.getElementById('demo-1-title').textContent = t.d1t;
+                document.getElementById('demo-1-desc').textContent = t.d1d;
+                document.getElementById('demo-2-title').textContent = t.d2t;
+                document.getElementById('demo-2-desc').textContent = t.d2d;
 
                 const featureCards = document.querySelectorAll('.feature-card');
                 featureCards[0].querySelector('h3').textContent = t.f1;

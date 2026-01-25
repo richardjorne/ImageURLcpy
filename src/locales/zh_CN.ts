@@ -23,6 +23,8 @@ export const zh_CN: LocaleType = {
             desc: "当只捕获一个图片时使用此格式",
             prefixObj: "前缀",
             suffixObj: "后缀",
+            prefixPlaceholder: "例如: <img src=&quot;",
+            suffixPlaceholder: '例如: &quot;>',
             preview: "预览"
         },
         multiUrl: {

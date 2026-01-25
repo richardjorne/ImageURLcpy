@@ -497,6 +497,77 @@ body.lang-ja .cjk-bold {
     line-height: 1.6;
 }
 
+/* ==================== Showcase / Demo Section ==================== */
+.demo {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.demo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+}
+
+.demo-item {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.demo-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.demo-info {
+    flex: 1;
+}
+
+.demo-info h3 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #f0f5ec;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.demo-info p {
+    font-size: 18px;
+    color: #9aaa96;
+    line-height: 1.7;
+}
+
+.browser-mockup {
+    flex: 1.2;
+    background: rgba(20, 35, 20, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(160, 180, 140, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.browser-mockup:hover {
+    transform: translateY(-5px);
+}
+
+
+.browser-mockup img {
+    width: 100%;
+    display: block;
+    mix-blend-mode: lighten;
+    opacity: 0.95;
+    transition: opacity 0.3s ease;
+}
+
+.browser-mockup:hover img {
+    opacity: 1;
+}
+
 /* ==================== How It Works Section ==================== */
 .how-it-works {
     padding: 100px 48px;
@@ -597,6 +668,21 @@ footer p {
     .features-grid {
         grid-template-columns: 1fr;
         gap: 16px;
+    }
+
+    .demo-item,
+    .demo-item.reverse {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .demo-info h3 {
+        font-size: 28px;
+    }
+
+    .demo-info p {
+        font-size: 16px;
     }
 
     .how-it-works {

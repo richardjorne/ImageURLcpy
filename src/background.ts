@@ -22,8 +22,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Get the current active tab and send message to content script
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs[0]?.id) {
-                chrome.tabs.sendMessage(tabs[0].id, { action: 'startCapture' });
-                sendResponse({ success: true });
+                chrome.tabs.sendMessage(tabs[0].id, { action: 'startCapture' }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        // Content script likely not loaded
+                        console.log('Start capture failed:', chrome.runtime.lastError.message);
+                        sendResponse({ success: false, error: 'Cannot connect to page' });
+                        return;
+                    }
+                    sendResponse({ success: true });
+                });
+            } else {
+                sendResponse({ success: false, error: 'No active tab' });
             }
         });
         return true; // Keep message channel open for async response
@@ -32,8 +41,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'stopCaptureFromPopup') {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs[0]?.id) {
-                chrome.tabs.sendMessage(tabs[0].id, { action: 'stopCapture' });
-                sendResponse({ success: true });
+                chrome.tabs.sendMessage(tabs[0].id, { action: 'stopCapture' }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        // Content script likely not loaded
+                        console.log('Stop capture failed:', chrome.runtime.lastError.message);
+                        sendResponse({ success: false });
+                        return;
+                    }
+                    sendResponse({ success: true });
+                });
+            } else {
+                sendResponse({ success: false });
             }
         });
         return true;
@@ -43,6 +61,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs[0]?.id) {
                 chrome.tabs.sendMessage(tabs[0].id, { action: 'getStatus' }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        // Content script not loaded or error, assume default state
+                        console.log('Get status failed:', chrome.runtime.lastError.message);
+                        sendResponse({ isCapturing: false, urlCount: 0 });
+                        return;
+                    }
                     sendResponse(response || { isCapturing: false, urlCount: 0 });
                 });
             } else {

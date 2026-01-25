@@ -23,6 +23,8 @@ export interface LocaleType {
             desc: string;
             prefixObj: string;
             suffixObj: string;
+            prefixPlaceholder: string;
+            suffixPlaceholder: string;
             preview: string;
         },
         multiUrl: {

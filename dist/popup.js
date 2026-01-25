@@ -25,6 +25,8 @@ const zh_CN = {
             desc: "当只捕获一个图片时使用此格式",
             prefixObj: "前缀",
             suffixObj: "后缀",
+            prefixPlaceholder: "例如: <img src=&quot;",
+            suffixPlaceholder: '例如: &quot;>',
             preview: "预览"
         },
         multiUrl: {
@@ -83,6 +85,8 @@ const en = {
             desc: "Format used when capturing a single image",
             prefixObj: "Prefix",
             suffixObj: "Suffix",
+            prefixPlaceholder: 'e.g. <img src="',
+            suffixPlaceholder: 'e.g. ">"',
             preview: "Preview"
         },
         multiUrl: {
@@ -141,6 +145,8 @@ const ja = {
             desc: "画像を1つだけキャプチャする場合に使用されます",
             prefixObj: "接頭辞 (Prefix)",
             suffixObj: "接尾辞 (Suffix)",
+            prefixPlaceholder: '例: <img src="',
+            suffixPlaceholder: '例: ">"',
             preview: "プレビュー"
         },
         multiUrl: {
@@ -199,6 +205,8 @@ const fr = {
             desc: "Format utilisé lors de la capture d'une seule image",
             prefixObj: "Préfixe",
             suffixObj: "Suffixe",
+            prefixPlaceholder: 'ex: <img src="',
+            suffixPlaceholder: 'ex: ">"',
             preview: "Aperçu"
         },
         multiUrl: {
@@ -257,6 +265,8 @@ const es = {
             desc: "Formato utilizado al capturar una sola imagen",
             prefixObj: "Prefijo",
             suffixObj: "Sufijo",
+            prefixPlaceholder: 'ej: <img src="',
+            suffixPlaceholder: 'ej: ">"',
             preview: "Vista previa"
         },
         multiUrl: {
@@ -392,7 +402,7 @@ class I18n {
      * Renders all elements with data-i18n attribute in the given root element (or document body)
      */
     render(root = document) {
-        const elements = root.querySelectorAll('[data-i18n]');
+        const elements = root.querySelectorAll('[data-i18n], [data-i18n-placeholder], [data-i18n-title]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key) {
