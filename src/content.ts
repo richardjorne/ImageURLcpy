@@ -1,3 +1,5 @@
+import { I18n } from './utils/i18n';
+
 // Content Script for ImageURLcpy Extension
 
 interface FormatSettings {
@@ -37,6 +39,22 @@ const state: CaptureState = {
     stopButton: null,
     currentHoveredImg: null
 };
+
+// Initialize i18n
+const i18n = I18n.getInstance();
+i18n.init().catch(console.error);
+
+// Listen for language changes and update config
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync' && changes.language) {
+        i18n.init().then(() => {
+            // If capturing, update UI immediately
+            if (state.isCapturing && state.stopButton) {
+                state.stopButton.textContent = i18n.getMessage('content.button.stop');
+            }
+        }).catch(console.error);
+    }
+});
 
 // Format URLs with prefix/suffix settings
 function formatUrls(urls: string[], settings: FormatSettings): string {
@@ -93,7 +111,7 @@ function createOverlay(): HTMLDivElement {
 function createStopButton(): HTMLButtonElement {
     const button = document.createElement('button');
     button.id = 'imageurlcpy-stop-button';
-    button.textContent = '停止捕获';
+    button.textContent = i18n.getMessage('content.button.stop');
     button.style.cssText = `
     position: fixed;
     top: 20px;
@@ -274,13 +292,13 @@ async function handleClick(e: MouseEvent): Promise<void> {
 
             // Copy formatted URLs to clipboard
             navigator.clipboard.writeText(formattedUrls).then(() => {
-                showToast(`链接已拷贝：${url}`);
+                showToast(i18n.getMessage('content.toast.linkCopied', { url: url }));
             }).catch(err => {
                 console.error('Failed to copy:', err);
-                showToast('复制失败，请重试');
+                showToast(i18n.getMessage('content.toast.copyFailed'));
             });
         } else if (state.capturedUrls.includes(url)) {
-            showToast('该链接已经捕获过了');
+            showToast(i18n.getMessage('content.toast.alreadyCaptured'));
         }
     }
 }
@@ -316,7 +334,9 @@ function startCapture(): void {
     document.addEventListener('mouseout', handleMouseOut, true);
     document.addEventListener('click', handleClick, true);
 
-    showToast('图片捕获模式已开启，点击图片复制URL');
+
+
+    showToast(i18n.getMessage('content.toast.startStats'));
 }
 
 // Stop capture mode
@@ -357,13 +377,13 @@ async function stopCapture(): Promise<void> {
         const formattedUrls = formatUrls(capturedUrlsCopy, settings);
 
         navigator.clipboard.writeText(formattedUrls).then(() => {
-            showToast(`已复制 ${urlCount} 个图片链接到剪贴板`);
+            showToast(i18n.getMessage('content.toast.stopStats', { count: urlCount }));
         }).catch(err => {
             console.error('[ImageURLcpy] Failed to copy:', err);
-            showToast('复制失败，请重试');
+            showToast(i18n.getMessage('content.toast.copyFailed'));
         });
     } else {
-        showToast('捕获结束，未捕获任何图片');
+        showToast(i18n.getMessage('content.toast.noImageCaptured'));
     }
 
     // Clear state after copying

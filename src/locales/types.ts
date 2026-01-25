@@ -56,5 +56,23 @@ export interface LocaleType {
         language: {
             label: string;
         }
+    },
+    // Content Script
+    content: {
+        toast: {
+            linkCopied: string;
+            copyFailed: string;
+            alreadyCaptured: string;
+            startStats: string;
+            stopStats: string;
+            noImageCaptured: string;
+        },
+        button: {
+            stop: string;
+        }
+    },
+    // Context Menu
+    contextMenu: {
+        startCapture: string;
     }
 }

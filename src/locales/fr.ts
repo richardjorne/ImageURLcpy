@@ -56,5 +56,21 @@ export const fr: LocaleType = {
         language: {
             label: "Langue / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "Lien copié : {url}",
+            copyFailed: "Échec de la copie, veuillez réessayer",
+            alreadyCaptured: "Ce lien a déjà été capturé",
+            startStats: "Mode capture activé. Cliquez sur les images pour copier l'URL",
+            stopStats: "{count} URL d'images copiées dans le presse-papiers",
+            noImageCaptured: "Capture terminée. Aucune image capturée"
+        },
+        button: {
+            stop: "Arrêter la capture"
+        }
+    },
+    contextMenu: {
+        startCapture: "Démarrer la capture d'URL d'image"
     }
 };

@@ -1,12 +1,36 @@
+import { I18n } from './utils/i18n';
+
 // Background Service Worker for ImageURLcpy Extension
 
+const i18n = I18n.getInstance();
+
+// Function to update context menu
+const updateContextMenu = async () => {
+    await i18n.init(); // Reload language from storage
+    chrome.contextMenus.update('startCapture', {
+        title: i18n.getMessage('contextMenu.startCapture')
+    }, () => {
+        if (chrome.runtime.lastError) {
+            // Ignore if item doesn't exist yet
+        }
+    });
+};
+
 // Create context menu when extension is installed
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(async () => {
+    await i18n.init();
     chrome.contextMenus.create({
         id: 'startCapture',
-        title: '开始捕获图片URL',
+        title: i18n.getMessage('contextMenu.startCapture'),
         contexts: ['page', 'image']
     });
+});
+
+// Listen for language changes
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync' && changes.language) {
+        updateContextMenu();
+    }
 });
 
 // Handle context menu click

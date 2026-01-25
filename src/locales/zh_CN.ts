@@ -56,5 +56,21 @@ export const zh_CN: LocaleType = {
         language: {
             label: "语言 / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "链接已拷贝：{url}",
+            copyFailed: "复制失败，请重试",
+            alreadyCaptured: "该链接已经捕获过了",
+            startStats: "图片捕获模式已开启，点击图片复制URL",
+            stopStats: "已复制 {count} 个图片链接到剪贴板",
+            noImageCaptured: "捕获结束，未捕获任何图片"
+        },
+        button: {
+            stop: "停止捕获"
+        }
+    },
+    contextMenu: {
+        startCapture: "开始捕获图片URL"
     }
 };

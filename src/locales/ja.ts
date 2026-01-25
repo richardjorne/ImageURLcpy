@@ -56,5 +56,21 @@ export const ja: LocaleType = {
         language: {
             label: "言語 / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "リンクをコピーしました: {url}",
+            copyFailed: "コピーに失敗しました。もう一度お試しください",
+            alreadyCaptured: "このリンクはすでに取得済みです",
+            startStats: "キャプチャモードを開始しました。画像をクリックしてURLをコピー",
+            stopStats: "{count} 個の画像URLをクリップボードにコピーしました",
+            noImageCaptured: "キャプチャを終了しました。画像は取得されませんでした"
+        },
+        button: {
+            stop: "キャプチャ停止"
+        }
+    },
+    contextMenu: {
+        startCapture: "画像URLのキャプチャを開始"
     }
 };

@@ -56,5 +56,21 @@ export const es: LocaleType = {
         language: {
             label: "Idioma / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "Enlace copiado: {url}",
+            copyFailed: "Error al copiar, inténtelo de nuevo",
+            alreadyCaptured: "Este enlace ya ha sido capturado",
+            startStats: "Modo de captura iniciado. Haga clic en las imágenes para copiar la URL",
+            stopStats: "Copiadas {count} URL de imágenes al portapapeles",
+            noImageCaptured: "Captura finalizada. No se capturaron imágenes"
+        },
+        button: {
+            stop: "Detener captura"
+        }
+    },
+    contextMenu: {
+        startCapture: "Iniciar captura de URL de imagen"
     }
 };

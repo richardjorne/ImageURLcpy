@@ -58,6 +58,22 @@ const zh_CN = {
         language: {
             label: "语言 / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "链接已拷贝：{url}",
+            copyFailed: "复制失败，请重试",
+            alreadyCaptured: "该链接已经捕获过了",
+            startStats: "图片捕获模式已开启，点击图片复制URL",
+            stopStats: "已复制 {count} 个图片链接到剪贴板",
+            noImageCaptured: "捕获结束，未捕获任何图片"
+        },
+        button: {
+            stop: "停止捕获"
+        }
+    },
+    contextMenu: {
+        startCapture: "开始捕获图片URL"
     }
 };
 
@@ -118,6 +134,22 @@ const en = {
         language: {
             label: "Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "Link copied: {url}",
+            copyFailed: "Copy failed, please try again",
+            alreadyCaptured: "This link has already been captured",
+            startStats: "Capture mode started. Click images to copy URL",
+            stopStats: "Copied {count} image URLs to clipboard",
+            noImageCaptured: "Capture ended. No images captured"
+        },
+        button: {
+            stop: "Stop Capture"
+        }
+    },
+    contextMenu: {
+        startCapture: "Start Capture Image URL"
     }
 };
 
@@ -178,6 +210,22 @@ const ja = {
         language: {
             label: "言語 / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "リンクをコピーしました: {url}",
+            copyFailed: "コピーに失敗しました。もう一度お試しください",
+            alreadyCaptured: "このリンクはすでに取得済みです",
+            startStats: "キャプチャモードを開始しました。画像をクリックしてURLをコピー",
+            stopStats: "{count} 個の画像URLをクリップボードにコピーしました",
+            noImageCaptured: "キャプチャを終了しました。画像は取得されませんでした"
+        },
+        button: {
+            stop: "キャプチャ停止"
+        }
+    },
+    contextMenu: {
+        startCapture: "画像URLのキャプチャを開始"
     }
 };
 
@@ -238,6 +286,22 @@ const fr = {
         language: {
             label: "Langue / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "Lien copié : {url}",
+            copyFailed: "Échec de la copie, veuillez réessayer",
+            alreadyCaptured: "Ce lien a déjà été capturé",
+            startStats: "Mode capture activé. Cliquez sur les images pour copier l'URL",
+            stopStats: "{count} URL d'images copiées dans le presse-papiers",
+            noImageCaptured: "Capture terminée. Aucune image capturée"
+        },
+        button: {
+            stop: "Arrêter la capture"
+        }
+    },
+    contextMenu: {
+        startCapture: "Démarrer la capture d'URL d'image"
     }
 };
 
@@ -298,6 +362,22 @@ const es = {
         language: {
             label: "Idioma / Language"
         }
+    },
+    content: {
+        toast: {
+            linkCopied: "Enlace copiado: {url}",
+            copyFailed: "Error al copiar, inténtelo de nuevo",
+            alreadyCaptured: "Este enlace ya ha sido capturado",
+            startStats: "Modo de captura iniciado. Haga clic en las imágenes para copiar la URL",
+            stopStats: "Copiadas {count} URL de imágenes al portapapeles",
+            noImageCaptured: "Captura finalizada. No se capturaron imágenes"
+        },
+        button: {
+            stop: "Detener captura"
+        }
+    },
+    contextMenu: {
+        startCapture: "Iniciar captura de URL de imagen"
     }
 };
 
@@ -570,3 +650,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 /******/ })()
 ;
+//# sourceMappingURL=options.js.map

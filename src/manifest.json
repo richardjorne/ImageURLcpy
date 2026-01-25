@@ -36,7 +36,7 @@
     ],
     "action": {
         "default_popup": "popup.html",
-        "default_title": "ImageURLcpy",
+        "default_title": "__MSG_appName__",
         "default_icon": "assets/icons/icon.png"
     },
     "options_ui": {
