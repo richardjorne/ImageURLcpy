@@ -1,13 +1,21 @@
-// Popup Script for ImageURLcpy Extension
+import { I18n } from './utils/i18n';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    const i18n = I18n.getInstance();
+    await i18n.init();
+    i18n.render();
+
     const startBtn = document.getElementById('startBtn') as HTMLButtonElement;
     const stopBtn = document.getElementById('stopBtn') as HTMLButtonElement;
     const settingsBtn = document.getElementById('settingsBtn') as HTMLButtonElement;
     const statusEl = document.getElementById('status') as HTMLDivElement;
     const statusText = statusEl.querySelector('.status-text') as HTMLSpanElement;
     const urlCountEl = document.getElementById('urlCount') as HTMLDivElement;
-    const countEl = document.getElementById('count') as HTMLSpanElement;
+
+    // Note: In HTML we replaced the inner span with a single span with ID urlCountText
+    // But let's check if we want to grab that specific element to update it.
+    // In my previous step, I added `id="urlCountText"`.
+    const urlCountTextEl = document.getElementById('urlCountText') as HTMLSpanElement;
 
     // Open settings page
     settingsBtn.addEventListener('click', () => {
@@ -20,14 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
             startBtn.style.display = 'none';
             stopBtn.style.display = 'flex';
             statusEl.classList.add('active');
-            statusText.textContent = '捕获中...';
+            statusText.textContent = i18n.getMessage('popup.statusCapturing');
             urlCountEl.style.display = 'block';
-            countEl.textContent = urlCount.toString();
+
+            // Update dynamic count
+            if (urlCountTextEl) {
+                urlCountTextEl.textContent = i18n.getMessage('popup.copiedCount', { count: urlCount });
+            }
         } else {
             startBtn.style.display = 'flex';
             stopBtn.style.display = 'none';
             statusEl.classList.remove('active');
-            statusText.textContent = '待机中';
+            statusText.textContent = i18n.getMessage('popup.statusStandby');
             urlCountEl.style.display = 'none';
         }
     }
@@ -35,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get current capture status
     function getCaptureStatus(): void {
         chrome.runtime.sendMessage({ action: 'getCaptureStatus' }, (response) => {
+            // Check for runtime error (e.g. background invalid)
+            if (chrome.runtime.lastError) return;
+
             if (response) {
                 updateUI(response.isCapturing, response.urlCount);
             }
@@ -44,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start capture
     startBtn.addEventListener('click', () => {
         chrome.runtime.sendMessage({ action: 'startCaptureFromPopup' }, (response) => {
+            // Check for runtime error
+            if (chrome.runtime.lastError) return;
+
             if (response?.success) {
                 updateUI(true, 0);
                 // Close popup after starting
@@ -55,6 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Stop capture
     stopBtn.addEventListener('click', () => {
         chrome.runtime.sendMessage({ action: 'stopCaptureFromPopup' }, (response) => {
+            // Check for runtime error
+            if (chrome.runtime.lastError) return;
+
             if (response?.success) {
                 updateUI(false);
                 // Close popup after stopping

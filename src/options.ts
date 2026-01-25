@@ -1,4 +1,4 @@
-// Options Page Script for ImageURLcpy Extension
+import { I18n, LanguageCode } from './utils/i18n';
 
 interface FormatSettings {
     // Single URL
@@ -38,8 +38,11 @@ const elements = {
     multiPreview: document.getElementById('multiPreview') as HTMLElement,
     saveBtn: document.getElementById('saveBtn') as HTMLButtonElement,
     resetBtn: document.getElementById('resetBtn') as HTMLButtonElement,
-    status: document.getElementById('status') as HTMLDivElement
+    status: document.getElementById('status') as HTMLDivElement,
+    languageSelect: document.getElementById('languageSelect') as HTMLSelectElement
 };
+
+const i18n = I18n.getInstance();
 
 // Load settings from storage
 function loadSettings(): void {
@@ -71,7 +74,7 @@ function saveSettings(): void {
     };
 
     chrome.storage.sync.set(settings, () => {
-        showStatus('设置已保存', 'success');
+        showStatus(i18n.getMessage('options.actions.savedMsg'), 'success');
     });
 }
 
@@ -87,7 +90,7 @@ function resetSettings(): void {
         elements.lastPrefix.value = DEFAULT_SETTINGS.lastPrefix;
         elements.lastSuffix.value = DEFAULT_SETTINGS.lastSuffix;
         updatePreviews();
-        showStatus('已重置为默认设置', 'success');
+        showStatus(i18n.getMessage('options.actions.resetMsg'), 'success');
     });
 }
 
@@ -123,13 +126,29 @@ function showStatus(message: string, type: 'success' | 'error'): void {
     }, 3000);
 }
 
+// Handle Language Change
+async function handleLanguageChange() {
+    const newLang = elements.languageSelect.value as LanguageCode;
+    await i18n.setLanguage(newLang);
+    // Reload UI strings
+    i18n.render();
+}
+
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize I18n
+    await i18n.init();
+    i18n.render();
+
+    // Set existing language in selector
+    elements.languageSelect.value = i18n.getLanguage();
+
     loadSettings();
 
     // Event listeners
     elements.saveBtn.addEventListener('click', saveSettings);
     elements.resetBtn.addEventListener('click', resetSettings);
+    elements.languageSelect.addEventListener('change', handleLanguageChange);
 
     // Update previews on input change
     const inputs = [

@@ -311,3 +311,76 @@ h3 {
         width: 100%;
     }
 }
+/* Language Switcher Styles */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+.select-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 12px 40px 12px 44px; /* Space for icons */
+    background: rgba(20, 32, 18, 0.7);
+    border: 1px solid rgba(160, 180, 140, 0.15);
+    border-radius: 12px;
+    color: #e0f0dc;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.select-wrapper select:hover {
+    background: rgba(25, 40, 22, 0.8);
+    border-color: rgba(160, 200, 140, 0.3);
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border-color: rgba(160, 200, 140, 0.5);
+    box-shadow: 0 0 0 4px rgba(140, 180, 120, 0.15);
+    background: rgba(30, 48, 28, 0.9);
+}
+
+.select-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8aab80;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6a8a60;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.select-wrapper:hover .select-icon {
+    color: #a8d898;
+}
+
+.select-wrapper:hover .select-arrow {
+    color: #a8d898;
+}
+
+.select-wrapper select:focus + .select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+    color: #b8f0a8;
+}
+
+/* Update focus state for other inputs to match */
+.input-row input:focus {
+    border-color: rgba(160, 200, 140, 0.5);
+    box-shadow: 0 0 0 4px rgba(140, 180, 120, 0.15);
+}

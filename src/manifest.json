@@ -1,8 +1,9 @@
 {
     "manifest_version": 3,
-    "name": "ImageURLcpy",
+    "name": "__MSG_appName__",
     "version": "1.1.0",
-    "description": "快速捕获并复制网页中的图片URL",
+    "default_locale": "zh_CN",
+    "description": "__MSG_appDesc__",
     "permissions": [
         "activeTab",
         "contextMenus",

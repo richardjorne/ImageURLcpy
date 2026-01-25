@@ -34,6 +34,7 @@ module.exports = {
                 { from: 'src/content.css', to: 'content.css' },
                 { from: 'src/options.html', to: 'options.html' },
                 { from: 'src/options.css', to: 'options.css' },
+                { from: 'src/_locales', to: '_locales' },
             ],
         }),
     ],
